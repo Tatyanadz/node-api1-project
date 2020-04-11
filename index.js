@@ -15,6 +15,7 @@ server.post("/api/users", (req, res) => {
               res.status(201).json({ name, bio })
           })
           .catch(err => {
+              console.log("Error with POST/api/users", err)
               res.status(500).json({
                   errorMessage: "There was an error while saving the user to the database"
               })
@@ -27,6 +28,11 @@ server.post("/api/users", (req, res) => {
 })
 
 //GET
+
+server.get("/", (req, res) => {
+    res.json({ message: 'hello world'})
+})
+
 
 server.get("/api/users/:id", (req, res) => {
     const id = req.params.id
@@ -41,6 +47,7 @@ server.get("/api/users/:id", (req, res) => {
           }
       })
       .catch(err => {
+          console.log("Error with GET/api/users", err)
           res.status(500).json({
             errorMessage: "The users information could not be retrieved"  
           })
@@ -61,7 +68,8 @@ server.delete("/api/users/:id", (req, res) => {
               })
           }
       })
-      .catch(error => {
+      .catch(err => {
+          console.log("Error with DELETE/api/users/:id", err);
           res.status(500).json({
              errorMessage: "The user could not be removed"
           })
@@ -88,6 +96,7 @@ server.put("/api/users/:id", (req, res) => {
               }
           })
           .catch(err => {
+              console.log("Error with PUT/api/users", err)
               res.status(500).json({
                   errorMessage: "The user information could not be modified."
               })
@@ -102,6 +111,6 @@ server.put("/api/users/:id", (req, res) => {
 
 //LISTEN
 
-server.listen(8080, () => {
-    console.log("server started at port 8080")
+server.listen(3001, () => {
+    console.log("server started at port 3001")
 })
